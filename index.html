@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>じゃんけんアプリ</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1 class="title">変則じゃんけんアプリ</h1>
+
+<div class="main">
+  <div class="my">
+    <h1>あなた</h1>
+    <p class="myhand"><img src="sozai/siro.png" alt=""width=200px></p>
+  </div>
+  <div class="vs">
+    <h1>じゃんけんの結果は</h1>
+    <p class="resalt" id="resalt">結果</p>
+     <div class="point">
+        <p class="mypoint">0</p>
+        <p>ー</p>
+        <p class="cppoint">0</p>
+     </div>
+  </div>
+  <div class="cp">
+    <h1>コンピューター </h1>
+    <p class="text" id="text"><img src="sozai/siro.png" alt="" width=200px></p>
+  </div>
+ <div class="cpmotion">
+  <p class="fukidashi"><img src="sozai/fukidashi.png" width=200px></p>
+  <p class="cpface"></p>
+  <h1>ぱそこん君</h1>
+ </div> 
+</div>
+
+<div class="btn">
+<button class="rock"><img src="sozai/gu.png" alt=""></button>
+<button class="scissors"><img src="sozai/tyoki.png" alt=""></button>
+<button class="paper"><img src="sozai/pa.png" alt=""></button>
+<button class="dara"><img src="sozai/dara.png" alt=""></button>
+<button class="pin"><img src="sozai/pin.png" alt=""></button>
+</div>
+<div class="setumei">
+<h1 class=setumei1>説明</h1>
+<img src="sozai/20180416_y-koba3-4.jpg" alt="">
+<!-- 説明写真 -->
+</div>
+
+<script src="jankencs/jquery-3.3.1.min.js"></script>
+
+<script>
+
+       let PointMe=0;
+       let PointCom=0;
+
+       $('.rock').on('click',function(){
+        const randomNumber =Math.ceil(Math.random()*5);
+
+         if( randomNumber==1){
+            view='<img src= "sozai/gu.png" width="200">'
+            judge='あいこ'
+            motion='<img src= "sozai/fukidashi3.png"  width="200">'//あいこ
+            var audio = new Audio("sounds/hikiwake.mp3");
+            audio.play();
+         // グー
+
+        }else if(randomNumber==2){
+        　  view='<img src= "sozai/tyoki.png" width="200">'
+            judge='あなたの勝ち'
+            PointMe+=1
+            motion='<img src= "sozai/fukidashi2.png"  width="200">'//やられた
+            var audio = new Audio("sounds/yarare.mp3");
+            audio.play();
+         // チョキ
+
+        }else if(randomNumber==3){
+            view='<img src= "sozai/pa.png" width="200">'
+            judge='あなたの負け' 
+            PointCom+=4
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+　　     // パー
+
+        }else if(randomNumber==4){
+    　　　　 view='<img src= "sozai/dara.png" width="200">'
+    　　　　 judge='あなたの勝ち'
+            PointMe+=1
+            motion='<img src= "sozai/fukidashi4.png"  width="200">'//むむむ
+            var audio = new Audio("sounds/mumumu.mp3");
+            audio.play();
+         // ダラ
+
+        }else{
+            view='<img src= "sozai/pin.png" width="200">'
+    　　　　 judge='あなたの負け'
+            PointCom+=3 
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+        //  ピン
+        }
+        myte='<img src= "sozai/gu.png" width="200">'
+        $(".text").html(view);
+        $(".resalt").html(judge);
+        $(".myhand").html(myte);
+        $(".mypoint").html(PointMe);
+        $(".cppoint").html(PointCom);
+        $(".fukidashi").html(motion);
+    });
+
+    $('.scissors').on('click',function(){
+        const randomNumber =Math.ceil(Math.random()*5);
+
+         if( randomNumber==1){
+            view='<img src= "sozai/gu.png" width="200">'
+            judge='あなたの負け'
+            PointCom+=1
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            // グー
+
+        }else if(randomNumber==2){
+        　  view='<img src= "sozai/tyoki.png" width="200">'
+            judge='あいこ'
+            motion='<img src= "sozai/fukidashi3.png"  width="200">'//あいこ
+            var audio = new Audio("sounds/hikiwake.mp3");
+            audio.play();
+            // チョキ
+
+        }else if(randomNumber==3){
+            view='<img src= "sozai/pa.png" width="200">'
+            judge='あなたの勝ち'
+            PointMe+=2
+            motion='<img src= "sozai/fukidashi2.png"  width="200">'//やられた
+            var audio = new Audio("sounds/yarare.mp3");
+            audio.play();
+            // パー
+
+        }else if(randomNumber==4){
+    　　　　 view='<img src= "sozai/dara.png" width="200">'
+    　　　　 judge='あなたの勝ち'
+            PointMe+=2
+            motion='<img src= "sozai/fukidashi4.png"  width="200">'//むむむ
+            var audio = new Audio("sounds/mumumu.mp3");
+            audio.play();
+            // ダラ
+
+        }else{
+            view='<img src= "sozai/pin.png" width="200">'
+    　　　　 judge='あなたの負け'
+            PointCom+=3
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            //  ピン
+        }
+        myte='<img src= "sozai/tyoki.png" width="200">'
+        $(".text").html(view);
+        $(".resalt").html(judge);
+        $(".myhand").html(myte);
+        $(".mypoint").html(PointMe);
+        $(".cppoint").html(PointCom);
+        $(".fukidashi").html(motion);
+    });
+
+    $('.paper').on('click',function(){
+        const randomNumber =Math.ceil(Math.random()*5);
+
+         if( randomNumber==1){
+            view='<img src= "sozai/gu.png" width="200">'
+            judge='あなたの勝ち'
+            PointMe+=4
+            motion='<img src= "sozai/fukidashi2.png"  width="200">'//やられた
+            var audio = new Audio("sounds/yarare.mp3");
+            audio.play();
+            // グー
+
+        }else if(randomNumber==2){
+        　  view='<img src= "sozai/tyoki.png" width="200">'
+            judge='あなたの負け'
+            PointCom+=2
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            // チョキ
+
+        }else if(randomNumber==3){
+            view='<img src= "sozai/pa.png" width="200">'
+            judge='あいこ'
+            motion='<img src= "sozai/fukidashi3.png"  width="200">'//あいこ
+            var audio = new Audio("sounds/hikiwake.mp3");
+            audio.play();
+            // パー
+
+        }else if(randomNumber==4){
+    　　　　 view='<img src= "sozai/dara.png" width="200">'
+    　　　　 judge='あなたの勝ち'
+            PointMe+=4
+            motion='<img src= "sozai/fukidashi4.png"  width="200">'//むむむ
+            var audio = new Audio("sounds/mumumu.mp3");
+            audio.play();
+            // ダラ
+
+        }else{
+            view='<img src= "sozai/pin.png" width="200">'
+    　　　　 judge='あなたの負け'
+            PointCom+=3
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            //  ピン
+        }
+        myte='<img src= "sozai/pa.png" width="200">'
+        $(".text").html(view);
+        $(".resalt").html(judge);
+        $(".myhand").html(myte);
+        $(".mypoint").html(PointMe);
+        $(".cppoint").html(PointCom);
+        $(".fukidashi").html(motion);
+    });
+
+    $('.dara').on('click',function(){
+        const randomNumber =Math.ceil(Math.random()*5);
+
+         if( randomNumber==1){
+            view='<img src= "sozai/gu.png" width="200">'
+            judge='あなたの負け'
+            PointCom+=1
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            // グー
+
+        }else if(randomNumber==2){
+        　  view='<img src= "sozai/tyoki.png" width="200">'
+            judge='あなたの負け'
+            PointCom+=2
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            // チョキ
+
+        }else if(randomNumber==3){
+            view='<img src= "sozai/pa.png" width="200">'
+            judge='あなたの負け'
+            PointCom+=4
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            // パー
+
+        }else if(randomNumber==4){
+    　　　　 view='<img src= "sozai/dara.png" width="200">'
+    　　　　 judge='あいこ'
+            motion='<img src= "sozai/fukidashi3.png"  width="200">'//あいこ    
+            var audio = new Audio("sounds/hikiwake.mp3");
+            audio.play();
+            // ダラ
+
+        }else{
+            view='<img src= "sozai/pin.png" width="200">'
+    　　　　 judge='あなたの勝ち'
+            PointMe+=5
+            motion='<img src= "sozai/fukidashi5.png"  width="200">'//すごい
+            var audio = new Audio("sounds/sugoi.mp3");
+            audio.play();
+            //  ピン
+        }
+        myte='<img src= "sozai/dara.png" width="200">'
+        $(".text").html(view);
+        $(".resalt").html(judge);
+        $(".myhand").html(myte);
+        $(".mypoint").html(PointMe);
+        $(".cppoint").html(PointCom);
+        $(".fukidashi").html(motion);
+    });
+
+    $('.pin').on('click',function(){
+        const randomNumber =Math.ceil(Math.random()*5);
+
+         if( randomNumber==1){
+            view='<img src= "sozai/gu.png" width="200">'
+            judge='あなたの勝ち'
+            PointMe+=3
+            motion='<img src= "sozai/fukidashi6.png"  width="200">'//あんぱい
+            var audio = new Audio("sounds/annpai.mp3");
+            audio.play();
+            // グー
+
+        }else if(randomNumber==2){
+        　  view='<img src= "sozai/tyoki.png" width="200">'
+            judge='あなたの勝ち'
+            PointMe+=3
+            motion='<img src= "sozai/fukidashi6.png"  width="200">'//あんぱい
+            var audio = new Audio("sounds/annpai.mp3");
+            audio.play();
+            // チョキ
+
+        }else if(randomNumber==3){
+            view='<img src= "sozai/pa.png" width="200">'
+            judge='あなたの勝ち'
+            PointMe+=3
+            motion='<img src= "sozai/fukidashi6.png"  width="200">'//あんぱい
+            var audio = new Audio("sounds/annpai.mp3");
+            audio.play();
+            // パー
+
+        }else if(randomNumber==4){
+    　　　　 view='<img src= "sozai/dara.png" width="200">'
+    　　　　 judge='あなたの負け'
+            PointCom+=5
+            motion='<img src= "sozai/fukidashi1.png"  width="200">'//やった
+            var audio = new Audio("sounds/yatta.mp3");
+            audio.play();
+            // ダラ
+            
+        }else{
+            view='<img src= "sozai/pin.png" width="200">'
+    　　　　 judge='あいこ'
+            motion='<img src= "sozai/fukidashi3.png"  width="200">'//あいこ
+            var audio = new Audio("sounds/hikiwake.mp3");
+            audio.play();
+            //  ピン
+        }
+        myte='<img src= "sozai/pin.png" width="200">'
+        $(".text").html(view);
+        $(".resalt").html(judge);
+        $(".myhand").html(myte);
+        $(".mypoint").html(PointMe);
+        $(".cppoint").html(PointCom);
+        $(".fukidashi").html(motion);
+    });
+    
+
+if(PointMe-PointCom==0){
+    kao='<img src="face/face0.png" width="200">'//真顔
+}else if(0<PointMe-PointCom<=5){
+    kao='<img src="face/face1.png" width="200">'//焦りはじめ
+}else if(5<PointMe-PointCom<=10){
+    kao='<img src="face/face2.png" width="200">'//焦り
+}else if(10<PointMe-PointCom<=15){
+    kao='<img src="face/face3.png" width="200">'//負けてる
+}else if(15<PointMe-PointCom){
+    kao='<img src="face/face4.png" width="200">'//ぼろ負け
+}
+$(".cpface").html(kao);
+
+</script>
+</body>
+</html>
